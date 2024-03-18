@@ -23,6 +23,7 @@ export default function App() {
             ExtraBold: require('./assets/fonts/Inter-ExtraBold.ttf'),
             Black: require('./assets/fonts/Inter-Black.ttf'),
         });
+        setFontsLoaded(true);
     };
 
     React.useEffect(() => {
@@ -31,6 +32,9 @@ export default function App() {
             SplashScreen.hideAsync();
         }, 3000);
     }, []);
+    if (!fontsLoaded) {
+        return null;
+    }
 
     return (
         <ThemeProvider images={images}>
