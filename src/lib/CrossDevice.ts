@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 const FIGMA_WINDOW_WIDTH = 375;
-const FIGMA_WINDOW_HEIGHT = 812;
+const FIGMA_WINDOW_HEIGHT = 780;
 const portrait = Dimensions.get('window').width < Dimensions.get('window').height;
 
 export function getWidth(width: number) {
