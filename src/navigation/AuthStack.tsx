@@ -3,8 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from '../screens/auth/Login';
 import Register from '../screens/auth/Register';
-import ForgetPassword from '../screens/auth/ForgetPassword';
 import Start from '../screens/auth/Start';
+import UseTerms from '../screens/auth/UseTerms';
+import PolicyTerms from '../screens/auth/PolicyTerms';
 
 const AuthStack = createNativeStackNavigator();
 const Auth = () => {
@@ -17,7 +18,8 @@ const Auth = () => {
             <AuthStack.Screen name="Start" component={Start} />
             <AuthStack.Screen name="Login" component={Login} />
             <AuthStack.Screen name="Register" component={Register} />
-            <AuthStack.Screen name="ForgetPassword" component={ForgetPassword} />
+            <AuthStack.Screen name="UseTerms" component={UseTerms} />
+            <AuthStack.Screen name="PolicyTerms" component={PolicyTerms} />
         </AuthStack.Navigator>
     );
 };
