@@ -28,9 +28,14 @@ const Start = () => {
                     >
                         <Text style={styles.transparentButtonText}>Log in</Text>
                     </Pressable>
-                    <View style={styles.button}>
+                    <Pressable
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate('Register');
+                        }}
+                    >
                         <Text style={styles.buttonText}>Join now</Text>
-                    </View>
+                    </Pressable>
                 </View>
                 <Text style={styles.bottomText}>Let's Do eat</Text>
             </View>
