@@ -31,7 +31,7 @@ const Start = () => {
                     <Pressable
                         style={styles.button}
                         onPress={() => {
-                            navigation.navigate('Register');
+                            navigation.navigate('UseTerms');
                         }}
                     >
                         <Text style={styles.buttonText}>Join now</Text>
