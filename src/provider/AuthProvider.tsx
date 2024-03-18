@@ -15,7 +15,7 @@ interface Props {
 
 const AuthProvider = (props: Props) => {
     // user null = loading
-    const [user, setUser] = useState<null | boolean>(null);
+    const [user, setUser] = useState<null | boolean>(false); // 기능개발 진행 시 null로 변경
     const [session, setSession] = useState<Session | null>(null);
 
     const testLogin = () => {
@@ -24,17 +24,18 @@ const AuthProvider = (props: Props) => {
 
     useEffect(() => {
         // 화면구현 진행을 위해 임시 주석처리하였습니다. 기능개발 시 주석 해제 후 진행하시면 됩니다.
-        // const session = supabase.auth.session();
-        // setSession(session);
+
+        const session = supabase.auth.session();
+        setSession(session);
         // setUser(session ? true : false);
-        // const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-        //     console.log(`Supabase auth event: ${event}`);
-        //     setSession(session);
-        //     setUser(session ? true : false);
-        // });
-        // return () => {
-        //     authListener!.unsubscribe();
-        // };
+        const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+            console.log(`Supabase auth event: ${event}`);
+            setSession(session);
+            // setUser(session ? true : false);
+        });
+        return () => {
+            authListener!.unsubscribe();
+        };
     }, [user]);
 
     return (
