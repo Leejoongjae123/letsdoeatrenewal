@@ -103,7 +103,7 @@ export default function ({ navigation }: NativeStackScreenProps<AuthStackParamLi
                     </View>
                     <View style={{ height: getHeight(20) }} />
 
-                    <Pressable style={styles.button} onPress={() => {}}>
+                    <Pressable style={styles.button} onPress={() => navigation.navigate('CertEmail')}>
                         <Text style={styles.buttonText}>Sign up</Text>
                     </Pressable>
                     <View style={{ height: getHeight(18) }} />

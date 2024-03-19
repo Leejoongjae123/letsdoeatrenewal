@@ -6,6 +6,9 @@ import Register from '../screens/auth/Register';
 import Start from '../screens/auth/Start';
 import UseTerms from '../screens/auth/UseTerms';
 import PolicyTerms from '../screens/auth/PolicyTerms';
+import CertEmail from '../screens/auth/CertEmail';
+import RegisterComplete from '../screens/auth/RegisterComplete';
+import SetAlarm from '../screens/auth/SetAlarm';
 
 const AuthStack = createNativeStackNavigator();
 const Auth = () => {
@@ -20,6 +23,9 @@ const Auth = () => {
             <AuthStack.Screen name="Register" component={Register} />
             <AuthStack.Screen name="UseTerms" component={UseTerms} />
             <AuthStack.Screen name="PolicyTerms" component={PolicyTerms} />
+            <AuthStack.Screen name="CertEmail" component={CertEmail} />
+            <AuthStack.Screen name="RegisterComplete" component={RegisterComplete} />
+            <AuthStack.Screen name="SetAlarm" component={SetAlarm} />
         </AuthStack.Navigator>
     );
 };
