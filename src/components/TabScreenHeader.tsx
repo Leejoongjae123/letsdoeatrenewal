@@ -19,8 +19,12 @@ const TabScreenHeader = ({ headerLeft, headerTitle, headerRight, underline, tran
                 borderBottomWidth: underline ? 1 : 0,
             }}
         >
-            <View style={styles.leftContainer}>{typeof headerTitle === 'string' ? <Text style={styles.titleText}>{headerTitle}</Text> : headerTitle}</View>
-            <View style={styles.centerContainer}></View>
+            <View style={styles.leftContainer}>
+                {typeof headerTitle === 'string' ? <Text style={styles.titleText}>{headerTitle}</Text> : headerTitle}
+                <View style={styles.levelView}>
+                    <Text style={styles.levelText}>Lv1.로드슈터</Text>
+                </View>
+            </View>
             <View style={styles.rightContainer}>{headerRight}</View>
         </View>
     );
@@ -32,23 +36,15 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        height: getHeight(56),
         paddingHorizontal: getWidth(20),
         backgroundColor: BrandColor,
-
         marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
     leftContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
+        flex: 3,
+
+        alignItems: 'flex-start',
         justifyContent: 'flex-start',
-    },
-    centerContainer: {
-        flex: 2,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     titleText: {
         fontSize: getFont(32),
@@ -61,5 +57,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end',
+    },
+    levelView: {
+        width: getWidth(102),
+        height: getHeight(21),
+        backgroundColor: WhiteColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: getHeight(4),
+        borderRadius: getWidth(26),
+    },
+    levelText: {
+        fontSize: getFont(14),
+        color: DefaultBlack,
+        textAlign: 'center',
+        fontFamily: 'Regular',
     },
 });
