@@ -106,9 +106,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         backgroundColor: DefaultBlack,
-        // ios의 경우 추가값을 주는것이 좋지만, 현재 디자인에서는 영역이 겹치는 문제가 발생하여 우선 주석처리 하였습니다.
-        // height: Platform.OS === 'ios' ? getHeight(80) : getHeight(60),
-        height: getHeight(60),
+        height: Platform.OS === 'ios' ? getHeight(80) : getHeight(60),
         position: 'relative',
         paddingTop: getHeight(8),
     },
@@ -122,9 +120,7 @@ const styles = StyleSheet.create({
         width: getWidth(56),
         height: getWidth(56),
         borderRadius: getWidth(56),
-        // ios의 경우 추가값을 주는것이 좋지만, 현재 디자인에서는 영역이 겹치는 문제가 발생하여 우선 주석처리 하였습니다.
-        // bottom: Platform.OS === 'ios' ? getHeight(40) : getHeight(20),
-        bottom: getHeight(20),
+        bottom: Platform.OS === 'ios' ? getHeight(40) : getHeight(20),
         backgroundColor: BrandColor,
         justifyContent: 'center',
         alignItems: 'center',
