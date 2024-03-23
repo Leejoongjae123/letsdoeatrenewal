@@ -1,26 +1,29 @@
 import * as React from 'react';
 import { Text, View, StatusBar, StyleSheet, Platform } from 'react-native';
 import { getFont, getHeight, getWidth } from '../lib/CrossDevice';
-import { WhiteColor } from '../utils/Colors';
+import { DefaultBlack, WhiteColor } from '../utils/Colors';
 
 interface Props {
     headerLeft?: React.ReactNode;
     headerTitle?: React.ReactNode | string;
     headerRight?: React.ReactNode;
     underline?: boolean;
-    transparentStatus?: boolean;
+    dark?: boolean;
 }
 
-const Header = ({ headerLeft, headerTitle, headerRight, underline, transparentStatus }: Props) => {
+const Header = ({ headerLeft, headerTitle, headerRight, underline, dark }: Props) => {
     return (
         <View
             style={{
                 ...styles.container,
                 borderBottomWidth: underline ? 1 : 0,
+                backgroundColor: dark ? DefaultBlack : WhiteColor,
             }}
         >
             <View style={styles.leftContainer}>{headerLeft}</View>
-            <View style={styles.centerContainer}>{typeof headerTitle === 'string' ? <Text style={styles.titleText}>{headerTitle}</Text> : headerTitle}</View>
+            <View style={styles.centerContainer}>
+                {typeof headerTitle === 'string' ? <Text style={{ ...styles.titleText, color: dark ? WhiteColor : DefaultBlack }}>{headerTitle}</Text> : headerTitle}
+            </View>
             <View style={styles.rightContainer}>{headerRight}</View>
         </View>
     );
@@ -53,7 +56,6 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: getFont(18),
         textAlign: 'center',
-        color: '#000',
         fontFamily: 'Bold',
     },
     rightContainer: {
