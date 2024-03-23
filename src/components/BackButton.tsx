@@ -11,9 +11,9 @@ const BackButton = ({ onPress, white }: PropsType) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
             {white ? (
-                <Image style={{ width: getWidth(22), height: getWidth(22) }} source={require('../../assets/images/common/Icon_arrow_left_white.png')} />
+                <Image style={{ width: getWidth(22), height: getWidth(22) }} source={require('../../assets/images/common/Icon_backbutton_arrow_left_white.png')} />
             ) : (
-                <Image style={{ width: getWidth(22), height: getWidth(22) }} source={require('../../assets/images/common/Icon_arrow_left.png')} />
+                <Image style={{ width: getWidth(22), height: getWidth(22) }} source={require('../../assets/images/common/Icon_backbutton_arrow_left.png')} />
             )}
         </TouchableOpacity>
     );
