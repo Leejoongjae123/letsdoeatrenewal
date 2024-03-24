@@ -9,9 +9,10 @@ interface Props {
     headerRight?: React.ReactNode;
     underline?: boolean;
     transparentStatus?: boolean;
+    level?: number;
 }
 
-const TabScreenHeader = ({ headerLeft, headerTitle, headerRight, underline, transparentStatus }: Props) => {
+const TabScreenHeader = ({ headerLeft, headerTitle, headerRight, underline, transparentStatus, level }: Props) => {
     return (
         <View
             style={{
@@ -21,9 +22,11 @@ const TabScreenHeader = ({ headerLeft, headerTitle, headerRight, underline, tran
         >
             <View style={styles.leftContainer}>
                 {typeof headerTitle === 'string' ? <Text style={styles.titleText}>{headerTitle}</Text> : headerTitle}
-                <View style={styles.levelView}>
-                    <Text style={styles.levelText}>Lv1.로드슈터</Text>
-                </View>
+                {level && (
+                    <View style={styles.levelView}>
+                        <Text style={styles.levelText}>Lv1.로드슈터</Text>
+                    </View>
+                )}
             </View>
             <View style={styles.rightContainer}>{headerRight}</View>
         </View>
