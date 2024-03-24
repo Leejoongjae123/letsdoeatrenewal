@@ -66,7 +66,7 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
                     )}
                 </Pressable>
                 <Pressable style={styles.tabMenu} onPress={() => navigation.navigate('Mypage')}>
-                    {state.index === 3 ? (
+                    {state.index === 3 || state.index === 5 || state.index === 6 ? (
                         <Image
                             style={{
                                 width: getWidth(30),
