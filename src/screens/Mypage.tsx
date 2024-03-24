@@ -103,7 +103,7 @@ const Mypage = () => {
                     {/* 리워드 */}
                     {/* 검수내역 */}
                     <View style={{ ...styles.menuContainer, paddingBottom: 0 }}>
-                        <Pressable style={{ ...styles.menuItem, paddingVertical: getHeight(12) }} onPress={() => navigation.navigate('Check')}>
+                        <Pressable style={{ ...styles.menuItem, paddingVertical: getHeight(12), borderBottomWidth: 0 }} onPress={() => navigation.navigate('Check')}>
                             <Text style={styles.menuText}>검수내역</Text>
                             <View style={styles.menuRightView}>
                                 <Text style={styles.menuRightText}>3</Text>
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     },
     menuItem: {
         paddingTop: getHeight(16),
-        paddingVertical: getHeight(10),
+        paddingBottom: getHeight(10),
         paddingLeft: getWidth(16),
         paddingRight: getWidth(6),
         flexDirection: 'row',
