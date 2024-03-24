@@ -37,6 +37,7 @@ NativeStackScreenProps<MainStackParamList, 'MainTabs'>) {
                                 />
                             </Pressable>
                         }
+                        level={1}
                     />
                     <View style={styles.adView}>
                         <Text>광고섹션</Text>
