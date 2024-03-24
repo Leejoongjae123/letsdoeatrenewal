@@ -313,6 +313,7 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginRight: getWidth(16),
         width: getWidth(110),
+        paddingRight: getWidth(12),
     },
     historyPriceRed: {
         fontSize: getFont(16),
@@ -321,5 +322,6 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginRight: getWidth(16),
         width: getWidth(110),
+        paddingRight: getWidth(12),
     },
 });
