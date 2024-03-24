@@ -84,7 +84,7 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
                         />
                     )}
                 </Pressable>
-                <Pressable style={{ ...styles.roundTabMenu, right: width / 2 - getWidth(28) }}>
+                <Pressable style={{ ...styles.roundTabMenu, right: width / 2 - getWidth(28) }} onPress={() => navigation.navigate('Camera')}>
                     <Image
                         style={{
                             width: getWidth(56),
