@@ -117,7 +117,7 @@ const Check = () => {
                             <Text style={styles.historyDate}>2024.02.01</Text>
                         </View>
                         {filterDateSelect && (
-                            <View style={{ ...styles.historyItem, position: 'absolute', top: getHeight(30), right: getWidth(72), zIndex: 999, borderBottomWidth: 0 }}>
+                            <View style={{ ...styles.historyItem, position: 'absolute', top: getHeight(44), right: getWidth(72), zIndex: 999, borderBottomWidth: 0, paddingTop: 0 }}>
                                 <View />
                                 <View>
                                     <View style={{ height: getHeight(4) }} />
@@ -165,7 +165,7 @@ const Check = () => {
                             </View>
                         )}
                         {filterTypeSelect && (
-                            <View style={{ ...styles.historyItem, position: 'absolute', top: getHeight(30), right: getWidth(20), zIndex: 999, borderBottomWidth: 0 }}>
+                            <View style={{ ...styles.historyItem, position: 'absolute', top: getHeight(44), right: getWidth(20), zIndex: 999, borderBottomWidth: 0, paddingTop: 0 }}>
                                 <View />
                                 <View>
                                     <View>
