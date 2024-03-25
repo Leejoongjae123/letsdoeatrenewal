@@ -1,18 +1,42 @@
 import React from 'react';
-import { View, SafeAreaView, StyleSheet, Pressable, Image, Text } from 'react-native';
-import { MainStackParamList } from '../types/navigation';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { View, SafeAreaView, StyleSheet, Pressable, Image, Text, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { BrandColor, DefaultBlack, DefaultGray, WhiteColor } from '../utils/Colors';
 import TabScreenHeader from '../components/TabScreenHeader';
 import { getFont, getHeight, getWidth } from '../lib/CrossDevice';
 import * as Progress from 'react-native-progress';
 
-export default function ({}: //navigation,
-NativeStackScreenProps<MainStackParamList, 'MainTabs'>) {
+export default function ({ route }: any) {
     // const { isDarkmode, setTheme } = useTheme();
     const navigation = useNavigation();
     const [bottomViewState, setBottomViewState] = React.useState(false);
+
+    const [uploadState, setUploadState] = React.useState(false);
+    const [uploadFold, setUploadFold] = React.useState(false);
+    const [uploadProgress, setUploadProgress] = React.useState(0);
+    React.useEffect(() => {
+        if (route?.params?.upload) {
+            setUploadState(true);
+        }
+    }, [route?.params]);
+
+    React.useEffect(() => {
+        if (uploadState) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                setUploadProgress(progress);
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        setUploadState(false);
+                        setUploadProgress(0);
+                    }, 5000);
+                }
+            }, 30);
+            return () => clearInterval(interval);
+        }
+    }, [uploadState]);
     return (
         <View style={styles.container}>
             <SafeAreaView
@@ -55,8 +79,8 @@ NativeStackScreenProps<MainStackParamList, 'MainTabs'>) {
                         >
                             <Image
                                 style={{
-                                    width: getWidth(170),
-                                    height: getHeight(230),
+                                    width: getWidth(166),
+                                    height: getHeight(224),
                                 }}
                                 source={require('../../assets/images/main/main_user_image.png')}
                             />
@@ -76,7 +100,7 @@ NativeStackScreenProps<MainStackParamList, 'MainTabs'>) {
                                         fontFamily: 'Regular',
                                         color: WhiteColor,
                                         lineHeight: getHeight(18),
-                                        marginBottom: getHeight(6),
+
                                         marginTop: getHeight(6),
                                     }}
                                 >
@@ -86,7 +110,7 @@ NativeStackScreenProps<MainStackParamList, 'MainTabs'>) {
                                     style={{
                                         fontSize: getFont(22),
                                         color: WhiteColor,
-                                        lineHeight: getHeight(30),
+                                        lineHeight: getHeight(32),
                                         fontFamily: 'SemiBold',
                                     }}
                                 >
@@ -94,7 +118,7 @@ NativeStackScreenProps<MainStackParamList, 'MainTabs'>) {
                                         style={{
                                             fontSize: getFont(15),
                                             fontFamily: 'Regular',
-                                            lineHeight: getHeight(21),
+                                            lineHeight: getHeight(28),
                                         }}
                                     >
                                         ₩
@@ -252,7 +276,99 @@ NativeStackScreenProps<MainStackParamList, 'MainTabs'>) {
                         <Text>광고섹션</Text>
                     </View>
                 </View>
+                {uploadState && uploadFold && (
+                    <Pressable style={styles.foldUploadContainer} onPress={() => setUploadFold(false)}>
+                        <View style={styles.foldUploadHeader}>
+                            <Text style={styles.foldUploadHeaderText}>{uploadProgress < 100 ? '영상 업로드중' : '업로드 완료'}</Text>
+                            <Text
+                                style={{
+                                    fontSize: getFont(12),
+                                    color: WhiteColor,
+                                    fontFamily: 'Regular',
+                                    textAlign: 'right',
+                                }}
+                            >
+                                {uploadProgress}%
+                            </Text>
+                        </View>
+                        <Progress.Bar
+                            progress={uploadProgress / 100}
+                            width={getWidth(322)}
+                            color={uploadProgress < 30 ? '#db4437' : uploadProgress < 100 ? BrandColor : '#05ff62'}
+                            borderColor={DefaultBlack}
+                            unfilledColor="#eeeeee"
+                            style={{
+                                height: getHeight(8),
+                                marginTop: getHeight(8),
+                            }}
+                        />
+                    </Pressable>
+                )}
             </SafeAreaView>
+            <Modal visible={uploadState && !uploadFold} transparent>
+                <View style={styles.uploadModal}>
+                    <View style={styles.uploadModalView}>
+                        <Pressable style={styles.uploadModalHeader} onPress={() => setUploadFold(true)}>
+                            <Text style={styles.uploadModalHeaderText}>{uploadProgress < 100 ? '영상 업로드중' : '업로드 완료'}</Text>
+                            <Image
+                                style={{
+                                    width: getWidth(36),
+                                    height: getWidth(36),
+                                }}
+                                source={!uploadFold ? require('../../assets/images/main/Icon_arrow_down.png') : require('../../assets/images/main/Icon_arrow_up.png')}
+                            />
+                        </Pressable>
+                        <Text style={styles.uploadModalContent}>{uploadProgress < 100 && '원활한 업로드를 위해 앱을 종료하지 말아주세요!'}</Text>
+
+                        <View
+                            style={{
+                                paddingHorizontal: getWidth(24),
+                                marginTop: getHeight(20),
+                            }}
+                        >
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    width: '100%',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontSize: getFont(12),
+                                        color: WhiteColor,
+                                        fontFamily: 'Regular',
+                                    }}
+                                >
+                                    Progress
+                                </Text>
+                                <Text
+                                    style={{
+                                        fontSize: getFont(12),
+                                        color: WhiteColor,
+                                        fontFamily: 'Regular',
+                                        textAlign: 'right',
+                                    }}
+                                >
+                                    {uploadProgress}%
+                                </Text>
+                            </View>
+                            <Progress.Bar
+                                progress={uploadProgress / 100}
+                                width={getWidth(287)}
+                                color={uploadProgress < 30 ? '#db4437' : uploadProgress < 100 ? BrandColor : '#05ff62'}
+                                borderColor={DefaultBlack}
+                                unfilledColor="#eeeeee"
+                                style={{
+                                    height: getHeight(8),
+                                    marginTop: getHeight(8),
+                                }}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
@@ -391,5 +507,66 @@ const styles = StyleSheet.create({
         fontSize: getFont(16),
         fontFamily: 'Medium',
         color: WhiteColor,
+    },
+
+    // 업로드 프로그레스모달
+    uploadModal: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    uploadModalView: {
+        width: getWidth(335),
+        height: getHeight(142),
+        marginBottom: getHeight(70),
+        backgroundColor: DefaultBlack,
+        borderRadius: getWidth(16),
+    },
+    uploadModalHeader: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: getHeight(14),
+        paddingHorizontal: getWidth(10),
+    },
+    uploadModalHeaderText: {
+        fontSize: getFont(16),
+        color: WhiteColor,
+        fontFamily: 'Bold',
+        marginLeft: getWidth(12),
+        marginTop: getHeight(10),
+    },
+    uploadModalContent: {
+        fontSize: getFont(14),
+        color: WhiteColor,
+        fontFamily: 'Regular',
+        marginLeft: getWidth(22),
+    },
+    // 접힌 업로드 프로그레스모달
+    foldUploadContainer: {
+        width: getWidth(376),
+        height: getHeight(60),
+        backgroundColor: DefaultBlack,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        borderTopLeftRadius: getWidth(26),
+        borderTopRightRadius: getWidth(26),
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        paddingHorizontal: getWidth(26),
+        paddingTop: getHeight(12),
+    },
+    foldUploadHeader: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    foldUploadHeaderText: {
+        fontSize: getFont(16),
+        color: WhiteColor,
+        fontFamily: 'Bold',
     },
 });
