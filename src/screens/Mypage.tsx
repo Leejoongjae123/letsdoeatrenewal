@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { BrandColor, DefaultBlack, DefaultGray, WhiteColor } from '../utils/Colors';
 import { getFont, getHeight, getWidth } from '../lib/CrossDevice';
 import * as Progress from 'react-native-progress';
@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderBottomLeftRadius: getWidth(8),
         borderBottomRightRadius: getWidth(8),
+        padding: Platform.OS === 'android' ? getHeight(36) : 0,
     },
     profileImageContainer: {
         position: 'relative',
