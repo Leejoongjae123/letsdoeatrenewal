@@ -8,6 +8,7 @@ import { getFont, getHeight, getWidth } from '../../lib/CrossDevice';
 import { BrandColor, DefaultBlack, WhiteColor } from '../../utils/Colors';
 import { useTheme } from 'react-native-rapi-ui';
 import { AuthContext } from '../../provider/AuthProvider';
+import { StatusBar } from 'expo-status-bar';
 
 export default function ({ navigation }: NativeStackScreenProps<AuthStackParamList, 'Login'>) {
     const { isDarkmode, setTheme } = useTheme();
@@ -35,90 +36,99 @@ export default function ({ navigation }: NativeStackScreenProps<AuthStackParamLi
 
     return (
         <View style={styles.container}>
-            <Image source={require('../../../assets/images/bg/login_bg.png')} style={styles.backImage} />
+            <StatusBar style="light" />
+            <ScrollView
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                style={{
+                    width: '100%',
+                }}
+            >
+                <Image source={require('../../../assets/images/bg/login_bg.png')} style={styles.backImage} />
 
-            <View style={styles.bottomView}>
-                <Text style={styles.title}>로그인</Text>
-                <Text style={styles.sub}>로그인을 진행해주세요</Text>
-                <Text style={styles.label}>Enter your e-mail</Text>
-                <View style={styles.inputView}>
-                    <TextInput style={styles.input} placeholder="Enter your e-mail" placeholderTextColor="#a3a3a3" />
-                    <Image
-                        source={require('../../../assets/images/common/Icon_envelope.png')}
-                        style={{
-                            width: getWidth(18),
-                            height: getWidth(18),
-                        }}
-                    />
-                </View>
-                <View style={{ height: getHeight(16) }} />
-                <Text style={styles.label}>Enter your password</Text>
-                <View style={styles.inputView}>
-                    <TextInput style={styles.input} placeholder="Enter your password" placeholderTextColor="#a3a3a3" secureTextEntry={true} />
-                    <Image
-                        source={require('../../../assets/images/common/Icon_eye_slash.png')}
-                        style={{
-                            width: getWidth(18),
-                            height: getWidth(18),
-                        }}
-                    />
-                </View>
-                <View style={{ height: getHeight(24) }} />
-                <View style={styles.loginBottomView}>
-                    <View style={styles.checkView}>
+                <View style={styles.bottomView}>
+                    <Text style={styles.title}>로그인</Text>
+                    <Text style={styles.sub}>로그인을 진행해주세요</Text>
+                    <Text style={styles.label}>Enter your e-mail</Text>
+                    <View style={styles.inputView}>
+                        <TextInput style={styles.input} placeholder="Enter your e-mail" placeholderTextColor="#a3a3a3" />
                         <Image
-                            source={require('../../../assets/images/common/Icon_checkbox.png')}
+                            source={require('../../../assets/images/common/Icon_envelope.png')}
                             style={{
-                                width: getWidth(20),
-                                height: getWidth(20),
+                                width: getWidth(18),
+                                height: getWidth(18),
                             }}
                         />
-                        <Text style={styles.autoLoginText}>자동로그인</Text>
                     </View>
-                    <Text style={styles.recoverPasswordText}>Recover password</Text>
+                    <View style={{ height: getHeight(16) }} />
+                    <Text style={styles.label}>Enter your password</Text>
+                    <View style={styles.inputView}>
+                        <TextInput style={styles.input} placeholder="Enter your password" placeholderTextColor="#a3a3a3" secureTextEntry={true} />
+                        <Image
+                            source={require('../../../assets/images/common/Icon_eye_slash.png')}
+                            style={{
+                                width: getWidth(18),
+                                height: getWidth(18),
+                            }}
+                        />
+                    </View>
+                    <View style={{ height: getHeight(24) }} />
+                    <View style={styles.loginBottomView}>
+                        <View style={styles.checkView}>
+                            <Image
+                                source={require('../../../assets/images/common/Icon_checkbox.png')}
+                                style={{
+                                    width: getWidth(20),
+                                    height: getWidth(20),
+                                }}
+                            />
+                            <Text style={styles.autoLoginText}>자동로그인</Text>
+                        </View>
+                        <Text style={styles.recoverPasswordText}>Recover password</Text>
+                    </View>
+                    <View style={{ height: getHeight(28) }} />
+                    <Pressable style={styles.loginButton} onPress={login}>
+                        <Text style={styles.loginButtonText}>로그인</Text>
+                    </Pressable>
+                    <View style={styles.lineView}>
+                        <View
+                            style={{
+                                width: getWidth(136),
+                                height: 1,
+                                backgroundColor: '#eeeeee',
+                            }}
+                        />
+                        <Text
+                            style={{
+                                fontSize: getFont(14),
+                                color: '#5d5d5b',
+                                fontFamily: 'Medium',
+                            }}
+                        >
+                            or
+                        </Text>
+                        <View
+                            style={{
+                                width: getWidth(136),
+                                height: 1,
+                                backgroundColor: '#eeeeee',
+                            }}
+                        />
+                    </View>
+                    <Pressable style={styles.googleLoginButton} onPress={login}>
+                        <Image
+                            source={require('../../../assets/images/sns/Icon_google.png')}
+                            style={{
+                                position: 'absolute',
+                                width: getWidth(51),
+                                height: getHeight(16),
+                                left: getWidth(31),
+                            }}
+                        />
+                        <Text style={styles.googleLoginButtonText}>구글 연동 로그인</Text>
+                    </Pressable>
                 </View>
-                <View style={{ height: getHeight(28) }} />
-                <Pressable style={styles.loginButton} onPress={login}>
-                    <Text style={styles.loginButtonText}>로그인</Text>
-                </Pressable>
-                <View style={styles.lineView}>
-                    <View
-                        style={{
-                            width: getWidth(136),
-                            height: 1,
-                            backgroundColor: '#eeeeee',
-                        }}
-                    />
-                    <Text
-                        style={{
-                            fontSize: getFont(14),
-                            color: '#5d5d5b',
-                            fontFamily: 'Medium',
-                        }}
-                    >
-                        or
-                    </Text>
-                    <View
-                        style={{
-                            width: getWidth(136),
-                            height: 1,
-                            backgroundColor: '#eeeeee',
-                        }}
-                    />
-                </View>
-                <Pressable style={styles.googleLoginButton} onPress={login}>
-                    <Image
-                        source={require('../../../assets/images/sns/Icon_google.png')}
-                        style={{
-                            position: 'absolute',
-                            width: getWidth(51),
-                            height: getHeight(16),
-                            left: getWidth(31),
-                        }}
-                    />
-                    <Text style={styles.googleLoginButtonText}>구글 연동 로그인</Text>
-                </Pressable>
-            </View>
+            </ScrollView>
         </View>
     );
 }
@@ -132,11 +142,9 @@ const styles = StyleSheet.create({
         backgroundColor: WhiteColor,
     },
     backImage: {
-        position: 'absolute',
-        top: 0,
-        left: -2,
         width: getWidth(377),
         height: getWidth(176),
+        marginLeft: getWidth(-2),
     },
     bottomView: {
         width: '100%',
@@ -182,6 +190,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(24),
     },
     input: {
+        flex: 1,
         maxWidth: '90%',
         fontSize: getFont(14),
         fontWeight: '500',

@@ -29,6 +29,7 @@ export default function ({ navigation }: NativeStackScreenProps<AuthStackParamLi
     // }
     return (
         <View style={styles.container}>
+            <StatusBar style="light" />
             <ScrollView
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
@@ -166,6 +167,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(24),
     },
     input: {
+        flex: 1,
         maxWidth: '90%',
         fontSize: getFont(14),
         fontWeight: '500',
