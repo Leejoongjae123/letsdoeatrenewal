@@ -1,20 +1,23 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { Image, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { BrandColor, DefaultBlack, DefaultGray, WhiteColor } from '../../utils/Colors';
 import Header from '../../components/Header';
 import BackButton from '../../components/BackButton';
 import { getFont, getHeight, getWidth } from '../../lib/CrossDevice';
+import { StatusBar } from 'expo-status-bar';
 
 const CameraScreen = () => {
     const navigation = useNavigation();
     const [isRecording, setIsRecording] = React.useState(false);
     return (
         <>
+            <StatusBar style="light" />
             <View style={styles.container}>
                 <SafeAreaView
                     style={{
                         width: '100%',
+                        paddingTop: Platform.OS === 'android' ? getHeight(36) : 0,
                     }}
                 >
                     <View style={styles.header}>
