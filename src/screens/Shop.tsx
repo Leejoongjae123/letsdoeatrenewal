@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { Image, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { BrandColor, DefaultBlack, WhiteColor } from '../utils/Colors';
 import TabScreenHeader from '../components/TabScreenHeader';
 import { getFont, getHeight, getWidth } from '../lib/CrossDevice';
@@ -14,6 +14,7 @@ const Shop = () => {
                 style={{
                     flex: 1,
                     width: '100%',
+                    paddingTop: Platform.OS === 'android' ? getHeight(20) : 0,
                 }}
             >
                 <TabScreenHeader
